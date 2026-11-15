@@ -124,11 +124,20 @@ terraform plan -var-file="environments/prod.tfvars"
 - ✅ Gitleaks pre-commit scanning (`.gitleaks.toml`)
 - ✅ State file excluded from git (`.gitignore`)
 - ✅ Provider version pinning for reproducibility
-
 ---
 
 <div align="center">
 
-**Built by [Rahul Goyal](https://github.com/rahulgoyaldevops)** — Senior Azure DevOps Engineer | 14+ Years Enterprise IT Background
+<sub>Designed & Implemented by <b><a href="https://github.com/rahulgoyaldevops">Rahul Goyal</a></b> — Senior DevOps & Cloud Platform Engineer (14+ Years Total IT)</sub>
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/rahulgoyaldevops/" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+  &nbsp;
+  <a href="https://github.com/rahulgoyaldevops?tab=repositories" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-Repositories-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+</p>
 
 </div>
