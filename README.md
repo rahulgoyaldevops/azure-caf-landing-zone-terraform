@@ -5,6 +5,7 @@
 [![Terraform](https://img.shields.io/badge/Terraform-v1.5+-623CE4?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
 [![Azure](https://img.shields.io/badge/Azure-Cloud-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![Terraform CI](https://github.com/rahulgoyaldevops/azure-caf-landing-zone-terraform/actions/workflows/terraform-ci.yml/badge.svg)](https://github.com/rahulgoyaldevops/azure-caf-landing-zone-terraform/actions/workflows/terraform-ci.yml)
 
 **Enterprise-grade Azure Landing Zone built with modular Terraform — parent/child module pattern for scalable, reusable infrastructure conforming to Microsoft Cloud Adoption Framework (CAF).**
 
@@ -13,6 +14,8 @@
 ---
 
 ## 📐 Architecture
+**Architecture Decision Record**: [ADR-001: Layered State Decomposition, Hub-Spoke Networking & CIS NSGs](docs/adr/001-layered-state-and-hub-spoke.md)
+
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
