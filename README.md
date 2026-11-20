@@ -44,6 +44,40 @@
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
+### 🌐 Hybrid Connectivity & Zero-Public-Exposure Private Link
+
+```mermaid
+flowchart LR
+    ONPREM["On-Premises Datacenter"] --> GW["ExpressRoute / VPN Gateway"]
+    GW --> HUB
+
+    subgraph HUB["Hub VNet"]
+        direction TB
+        FW["Azure Firewall / NVA"]
+        UDR["UDR 0.0.0.0/0"]
+        DNS["Private DNS Resolver"]
+    end
+
+    HUB -->|VNet Peering| SPOKE
+
+    subgraph SPOKE["Peered Spoke VNets"]
+        direction TB
+        NSG["CIS 4096 Deny-All NSGs"]
+        PE["Private Endpoints"]
+    end
+
+    PE --> PAAS
+
+    subgraph PAAS["Azure PaaS (Zero Public Exposure)"]
+        direction TB
+        PG["PostgreSQL"]
+        KV["Key Vault"]
+        ACR["ACR"]
+        ST["Storage"]
+    end
+```
+
+
 ## 🧩 Module Structure
 
 ```
