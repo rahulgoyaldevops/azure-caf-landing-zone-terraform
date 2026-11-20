@@ -47,34 +47,52 @@
 ### 🌐 Hybrid Connectivity & Zero-Public-Exposure Private Link
 
 ```mermaid
-flowchart LR
-    ONPREM["On-Premises Datacenter"] --> GW["ExpressRoute / VPN Gateway"]
-    GW --> HUB
+%%{init: {'theme': 'base', 'flowchart': {'curve': 'basis', 'nodeSpacing': 40, 'rankSpacing': 50}}}%%
+flowchart TB
+  subgraph T1["Tier 1: Hybrid Connectivity"]
+    direction LR
+    ONPREM["On-Premises Datacenter"] --> GW["ExpressRoute / S2S VPN Gateway"]
+  end
 
-    subgraph HUB["Hub VNet"]
-        direction TB
-        FW["Azure Firewall / NVA"]
-        UDR["UDR 0.0.0.0/0"]
-        DNS["Private DNS Resolver"]
-    end
+  subgraph T2["Tier 2: Hub VNet"]
+    direction LR
+    FW["Azure Firewall / NVA"] --> UDR["UDR 0.0.0.0/0 Forced Tunneling"] --> DNS["Private DNS Resolver"]
+  end
 
-    HUB -->|VNet Peering| SPOKE
+  subgraph T3["Tier 3: Peered Spoke VNets"]
+    direction LR
+    NSG["CIS 4096 Deny-All NSGs"] --> SUB["Workload Subnets"] --> PE["Private Endpoints"]
+  end
 
-    subgraph SPOKE["Peered Spoke VNets"]
-        direction TB
-        NSG["CIS 4096 Deny-All NSGs"]
-        PE["Private Endpoints"]
-    end
+  subgraph T4["Tier 4: Zero-Public-Exposure Azure PaaS"]
+    direction LR
+    PG["PostgreSQL Flexible Server"]
+    KV["Key Vault"]
+    ACR["ACR"]
+    ST["Storage Account"]
+  end
 
-    PE --> PAAS
+  T1 --> T2
+  T2 --> T3
+  T3 --> T4
+  linkStyle default stroke:#64748B,stroke-width:1.5px
 
-    subgraph PAAS["Azure PaaS (Zero Public Exposure)"]
-        direction TB
-        PG["PostgreSQL"]
-        KV["Key Vault"]
-        ACR["ACR"]
-        ST["Storage"]
-    end
+  classDef cobalt fill:#1D4ED8,stroke:#1E40AF,color:#FFFFFF,stroke-width:1.5px
+  classDef slate fill:#0F172A,stroke:#334155,color:#FFFFFF,stroke-width:1.5px
+  classDef emerald fill:#047857,stroke:#065F46,color:#FFFFFF,stroke-width:1.5px
+  classDef teal fill:#0E7490,stroke:#155E75,color:#FFFFFF,stroke-width:1.5px
+  classDef amber fill:#B45309,stroke:#92400E,color:#FFFFFF,stroke-width:1.5px
+
+  class ONPREM slate
+  class GW,FW,UDR,DNS cobalt
+  class NSG amber
+  class SUB teal
+  class PE,PG,KV,ACR,ST emerald
+
+  style T1 fill:transparent,stroke:#64748B,stroke-width:1.5px,color:#64748B
+  style T2 fill:transparent,stroke:#64748B,stroke-width:1.5px,color:#64748B
+  style T3 fill:transparent,stroke:#64748B,stroke-width:1.5px,color:#64748B
+  style T4 fill:transparent,stroke:#64748B,stroke-width:1.5px,color:#64748B
 ```
 
 
