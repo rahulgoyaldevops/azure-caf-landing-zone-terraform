@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🏗️ Azure Monolithic Landing Zone — Terraform
+# 🏗️ Azure CAF Landing Zone — Terraform
 
 [![Terraform](https://img.shields.io/badge/Terraform-v1.5+-623CE4?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
 [![Azure](https://img.shields.io/badge/Azure-Cloud-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/)
@@ -99,7 +99,7 @@ flowchart TB
 ## 🧩 Module Structure
 
 ```
-tf-monolithic-landing-zone/
+azure-caf-landing-zone-terraform/
 ├── parentmodule/
 │   ├── main.tf                    # Orchestrates all child modules
 │   ├── variable.tf                # Input variables for all resources
@@ -119,7 +119,7 @@ tf-monolithic-landing-zone/
     ├── route_table/                # UDR forced-tunneling (0.0.0.0/0 -> Azure Firewall)
     ├── pip/                        # Public IP allocation (Standard SKU)
     ├── network_interface/          # NIC with accelerated networking
-    └── azurerm_linux_virtual_machine/ # Linux VM with Availability Zone pinning
+    └── azurerm_virtual_machine/ # Linux VM with Availability Zone pinning
 ```
 
 ## 🏛️ Microsoft Cloud Adoption Framework (CAF) Hierarchy
@@ -166,19 +166,19 @@ terraform init -backend=false
 terraform validate
 
 # Preview changes with cost estimation
-terraform plan -var-file="environments/prod.tfvars"
+terraform plan
 ```
 
 ## 🔐 Security Best Practices
 
-- ✅ Microsoft CAF Enterprise-Scale hierarchy with policy boundaries
-- ✅ Zero hardcoded secrets — Key Vault lookups via `data` blocks
-- ✅ Pinned Availability Zones (`zone = "1"`)
-- ✅ Network microsegmentation with subnet-level NSG bindings
-- ✅ Forced tunneling egress via central Azure Firewall
-- ✅ Gitleaks pre-commit scanning (`.gitleaks.toml`)
-- ✅ State file excluded from git (`.gitignore`)
-- ✅ Provider version pinning for reproducibility
+- Microsoft CAF Enterprise-Scale hierarchy with policy boundaries
+- Zero hardcoded secrets — Key Vault lookups via `data` blocks
+- Pinned Availability Zones (`zone = "1"`)
+- Network microsegmentation with subnet-level NSG bindings
+- Forced tunneling egress via central Azure Firewall
+- Gitleaks pre-commit scanning (`.gitleaks.toml`)
+- State file excluded from git (`.gitignore`)
+- Provider version pinning for reproducibility
 ---
 
 <div align="center">
